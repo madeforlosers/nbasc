@@ -16,18 +16,6 @@ function stst(fn) {
 function runfil(name){
   shell.exec('node '+name+".js")
 }
-
-function stst2(fn) {
-  return new Function('return (' + fn +")")()
- 
- 
-};
-
-
-function vt(t){
-  return variables[t]
-};
-
 var acceptedwords = [
   "lovar",
   "senum",
