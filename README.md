@@ -2,7 +2,8 @@
 *another really complicated language*
 
 ## Table Of Contents
-1. Running Files
+1. Setting up
+1. Running files
 2. Running code in the shell
 3. Declaring
 4. Next Variable (NV) commands
@@ -17,6 +18,19 @@
     - BE CAREFUL!
     - how to use
     - how to make your own module
+
+
+## Setting up
+1. run these commands in your command line (you need NPM for this):
+
+```
+npm i m.easyansi
+npm i fs
+npm i prompt-sync
+npm i shelljs
+```
+2. install the JS file
+3. make your file and boom you did it111111!!
 
 
 ## Running files
