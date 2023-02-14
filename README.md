@@ -2,19 +2,28 @@
 *another really complicated language*
 
 ## Table Of Contents
-1. Declaring
-2. Next Variable (NV) commands
-3. Next Number (NN) commands
-4. Next String (NS) commands
-5. Next Date (ND) commands
-6. Number commands
-7. String commands
-8. Variable commands
-9. Misc. commands
-10. `import` command and how to use modules
+1. Running Files
+2. Running code in the shell
+3. Declaring
+4. Next Variable (NV) commands
+5. Next Number (NN) commands
+6. Next String (NS) commands
+7. Next Date (ND) commands
+8. Number commands
+9. String commands
+10. Variable commands
+11. Misc. commands
+12. `import` command and how to use modules
     - BE CAREFUL!
     - how to use
     - how to make your own module
+
+
+## Running files
+run `node nbasc.js [filename]`
+
+## Running code in the shell
+just run `node nbasc.js` 
 
 
 ## Declaring
@@ -36,7 +45,7 @@ loads a variable to be used.
 
 ## Next Variable (NV) commands
 
-###  `nvpri`
+### `nvpri`
 prints the current loaded variable to the screen.
 
 ## Next Number (NN) commands
