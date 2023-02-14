@@ -2,32 +2,16 @@ const ansi = require("m.easyansi")
 const fs = require("fs")
 const prompt = require("prompt-sync")({ sigint: true });
  const shell = require('shelljs')
-
-//console.log(file)
 function stst(fn) {
   ttt = new Function('return (' + fn +")")()
   //console.log(typeof fn)
   if(typeof ttt == "boolean"){
      return new Function('return (' + fn +")")();
   }
- 
 };
-
 function runfil(name){
   shell.exec('node '+name+".js")
 }
-
-function stst2(fn) {
-  return new Function('return (' + fn +")")()
- 
- 
-};
-
-
-function vt(t){
-  return variables[t]
-};
-
 var acceptedwords = [
   "lovar",
   "senum",
@@ -78,13 +62,6 @@ var acceptedwords = [
 var variables = {};
 var loaded = "";
 var commands;
-function bypass(jsn){
-  commands.push(jsn)
-}
-var customcommands = {
-  
-}
-
 commands = {
   "#":function(){}, //comment
   "lovar": function(va){loaded = va},
