@@ -39,6 +39,8 @@ var acceptedwords = [
   "nnset",
   "nnvset",
   "nsadd",
+  "nsrep",
+  "nsvrep",
   "nladd",
   "nsvadd",
   "nlvadd",
@@ -90,7 +92,7 @@ commands = {
   "nnadd": function(num = 1){variables[loaded] += parseInt(num)},
   "nnvadd": function(variable){variables[loaded] += variables[variable]},
   "nnsub": function(num = 1){variables[loaded] -= parseInt(num)},
-   "nnvsub": function(v){variables[loaded] -= variables[v]},
+  "nnvsub": function(v){variables[loaded] -= variables[v]},
   "nnmul": function(num = 2){variables[loaded] *= parseInt(num)},
   "nnvmul": function(variable){variables[loaded] *= variables[variable]},
   "nndiv": function(num = 2){variables[loaded] /= parseInt(num)},
@@ -101,6 +103,8 @@ commands = {
   "nnvsin": function(v){variables[loaded] = Math.sin(variables[v])},
   "nnsin": function(v){variables[loaded] = Math.sin(parseInt(v))},
   "nsadd": function(str){variables[loaded] += str},
+  "nsrep": function(newvar,times){variables[newvar] += variables[loaded].repeat(parseInt(times))},
+  "nsvrep": function(newvar,times){variables[newvar] += variables[loaded].repeat(parseInt(variables[times]))},
   "nladd": function(str){variables[loaded].push(str)},
   "nsvadd": function(str){variables[loaded] += variables[str]},
   "nlvadd": function(str){variables[loaded].push(variables[str])},
@@ -134,7 +138,6 @@ commands = {
       var name = filen["cmdlist"][i]
       acceptedwords.push(name)
       commands[name] = runfil.bind(null, filename+"/"+name) //i could have made this way better
-      //conveyer[file["cmdlist"][i]]()
     }
   },
    "rscol": function(){process.stdout.write(ansi.resetModules());},
