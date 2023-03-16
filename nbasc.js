@@ -2,8 +2,6 @@ const ansi = require("m.easyansi")
 const fs = require("fs")
 const prompt = require("prompt-sync")({ sigint: true });
  const shell = require('shelljs')
-
-//console.log(file)
 function stst(fn) {
   ttt = new Function('return (' + fn +")")()
   //console.log(typeof fn)
