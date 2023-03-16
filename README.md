@@ -2,8 +2,7 @@
 *another really complicated language*
 
 ## Table Of Contents
-1. Setting up
-1. Running files
+1. Running Files
 2. Running code in the shell
 3. Declaring
 4. Next Variable (NV) commands
@@ -18,19 +17,6 @@
     - BE CAREFUL!
     - how to use
     - how to make your own module
-
-
-## Setting up
-1. run these commands in your command line (you need NPM for this):
-
-```
-npm i m.easyansi
-npm i fs
-npm i prompt-sync
-npm i shelljs
-```
-2. install the JS file
-3. make your file and boom you did it111111!!
 
 
 ## Running files
@@ -120,14 +106,20 @@ sets the background color to the current loaded variable
 ### `nsadd [string]`
 adds a string to the current loaded variable
 
-### `nsvadd [variable]`
+### `nsvadd [number variable]`
 adds a variable to the current loaded variable
 
 ### `nssub [number]`
 subtracts the last n characters in a string
 
-### `nsvsub [variable name]`
+### `nsvsub [number variable]`
 subtracts the last n characters in a string (from a variable)
+
+### `nsrep [new variable name], [times]`
+creates a new variable (`[new variable name]`) that contains the currently loaded string repeated n amount of times (`[times]`)
+
+### `nsvrep [new variable name], [number variable]`
+creates a new variable (`[new variable name]`) that contains the currently loaded string repeated n amount of times (from a variable)
 
 ## Next List (NL) commands
 
