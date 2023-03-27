@@ -2,6 +2,8 @@ const ansi = require("m.easyansi")
 const fs = require("fs")
 const prompt = require("prompt-sync")({ sigint: true });
  const shell = require('shelljs')
+
+//console.log(file)
 function stst(fn) {
   ttt = new Function('return (' + fn +")")()
   //console.log(typeof fn)
@@ -23,6 +25,7 @@ var acceptedwords = [
   "stpri",
   "instpri",
   "nvpri",
+  "innvpri",
   "nnadd",
   "nnvadd",
   "nnsub",
@@ -79,6 +82,7 @@ commands = {
   "stpri": function(str){console.log(str)},
   "instpri": function(str){process.stdout.write(str)},
   "nvpri": function(){console.log(variables[loaded])},
+  "innvpri": function(){process.stdout.write(variables[loaded])},
   "senum": function(variable){variables[variable] = 0},
   "sestr": function(variable){variables[variable] = ""},
   "sedat": function(variable){variables[variable] = new Date()},
