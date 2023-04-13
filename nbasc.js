@@ -63,6 +63,8 @@ var acceptedwords = [
   "ndgtmn",
   "ndgtsc",
   "ndgthr",
+  "gtinp",
+  "nvgtinp",
   "import",
   "if",
   "#"
@@ -145,6 +147,8 @@ commands = {
     }
   },
    "rscol": function(){process.stdout.write(ansi.resetModules());},
+  "gtinp": function(text, v){variables[v] = prompt(text)},
+  "nvgtinp": function(text){variables[loaded] = prompt(text)},
   "if": function(v,bool,to){
     if(stst(variables[v]+bool)){return "toline"+to;}
   }
