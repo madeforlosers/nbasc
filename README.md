@@ -40,6 +40,9 @@ sets a date variable, the name declared in arguments
 ### `selis [variable name]`
 sets a list variable, the name declared in arguments
 
+### `sefcc [variable name],[char code]`
+sets a variable to a character from a char code
+
 ### `lovar [variable]`
 loads a variable to be used.
 
