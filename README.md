@@ -185,6 +185,12 @@ sets the cursor to the home
 ### `rscol`
 resets the color of the text and background
 
+### `gtinp [question],[variable]`
+gets input from user and stores it to variable
+
+### `nvgtinp [question]`
+gets input from user and stores it to loaded variable
+
 ## `import` command and how to use modules
 ### BE CAREFUL! *this can be used to import malicious commands and may ruin your system, check the command code before you use them!*
 
