@@ -34,6 +34,8 @@ var acceptedwords = [ //all the accepted commands. I don't know why I have this 
   "stpri", //string print
   "instpri", //inline string print
   "nvpri", //next variable print
+  "nvrem", //next variable remove
+  "vrem", //variable remove
   "innvpri", //inline next variable print
   "nnadd", //next number add
   "nnvadd", //next number variable add
@@ -99,6 +101,8 @@ commands = {
   "sestr": function(variable){variables[variable] = ""},
   "sedat": function(variable){variables[variable] = new Date()},
   "selis": function(variable){variables[variable] = []},
+  "nvrem": function(){variables[loaded] = undefined},
+  "vrem": function(variable){variables[variable] = undefined},
   "sefcc": function(variable,code){variables[variable] = String.fromCharCode(code)},
   "sernd": function(variable,min,max){variables[variable] = randomint(min,max)},
   "sefccfv": function(variable,variable2){variables[variable] = String.fromCharCode(parseInt(variables[variable2]))},
