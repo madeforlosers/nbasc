@@ -2,8 +2,8 @@ const ansi = require("m.easyansi"); //for colors and cursor pos
 const fs = require("fs"); //for reading file
 const prompt = require("prompt-sync")({ sigint: true }); //for gtinp, nvgtinp, and the shell
  const shell = require('shelljs'); //for modules
-var ignoreInternalError = false;
-var ignoreCommandError = false;
+var ignoreInternalError = false; // for iiner command
+var ignoreCommandError = false; //for iucer command
 
 function stst(fnt) { //for the "if" command, since i'm lazy
   fn = fnt
@@ -36,6 +36,9 @@ var acceptedwords = [ //all the accepted commands. I don't know why I have this 
   "selis", //set list
   "sefcc", //set from char code
   "sernd", //set random number
+  "gtflp", //get thing from list position
+  "nngtflp", //next number get thing from list position
+  "nlgtflp", //next list get thing from list position
   "sefccfv", //set from char code from variable
   "stpri", //string print
   "instpri", //inline string print
@@ -111,6 +114,9 @@ commands = {
   "vrem": function(variable){variables[variable] = undefined},
   "sefcc": function(variable,code){variables[variable] = String.fromCharCode(code)},
   "sernd": function(variable,min,max){variables[variable] = randomint(min,max)},
+   "gtflp": function(variable,pos,out){variables[out] = variables[variable][pos]},
+  "nngtflp": function(variable,out){variables[out] = variables[variable][variables[loaded]]},
+  "nlgtflp": function(pos,out){variables[out] = variables[loaded][pos]},
   "sefccfv": function(variable,variable2){variables[variable] = String.fromCharCode(parseInt(variables[variable2]))},
   "ndgtms": function(variable){variables[variable] = variables[loaded].getTime()},
   "ndgtsc": function(variable){variables[variable] = variables[loaded].getSeconds()},
