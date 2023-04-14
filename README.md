@@ -1,6 +1,6 @@
 # nbasc 
 *another really complicated language*<br>
-*version 3801*
+*version 3892*
 
 ## Table Of Contents
 1. Running Files
@@ -57,6 +57,9 @@ prints the current loaded variable to the screen.
 
 ### `nvgtinp [question]`
 gets input from user and stores it to loaded variable
+
+### `nvrem`
+sets the current loaded variable to `undefined`
 
 ## Next Number (NN) commands
 
@@ -209,6 +212,9 @@ ignores internal commands if they're bugging you too much.
 
 ### `iucer`
 ignores unknown command errors if they're bugging you too much.
+
+### `vrem [variable]`
+sets the variable listed in the arguments to `undefined`
 
 ## `import` command and how to use modules
 ### BE CAREFUL! *this can be used to import malicious commands and may ruin your system, check the command code before you use them!*
