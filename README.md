@@ -1,6 +1,6 @@
 # nbasc 
 *another really complicated language*<br>
-*version 4289*
+*version 4546*
 
 ## Table Of Contents
 1. Running Files
@@ -114,6 +114,9 @@ sets the text color to the current loaded variable
 ### `nnbgcol`
 sets the background color to the current loaded variable
 
+### `nngtflp [list variable],[output variable]`
+sets the output variable declared in arguments to an item in the position of whatever the loaded variable contains in a list also declared in arguments 
+
 ## Next String (NS) commands
 
 ### `nsadd [string]`
@@ -141,6 +144,9 @@ adds a string to the current loaded list
 
 ### `nlvadd [variable name]`
 adds the content of a variable to the current loaded list
+
+### `nlgtflp [position],[output variable]`
+sets the output variable to a item in the position (declared in arguments) in a currently loaded list
 
 ## Next Date (ND) commands
 
@@ -195,6 +201,11 @@ checks if var1 is higher than var2. if it is, it sets the variable (declared in 
 
 ### `iflower [var1],[var2],[variable name]`
 checks if var1 is lower than var2. if it is, it sets the variable (declared in the arguments as `variable name`) to a 1. if not, it sets it to a 0.
+
+## List Commands
+
+### `gtflp [list variable],[position],[output variable]`
+gets the item at the position (declared in arguments) of a list (also declared in arguments) and outputs it to a variable (also also declared in arguments)
 
 ## Misc. commands
 
