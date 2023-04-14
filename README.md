@@ -43,6 +43,9 @@ sets a list variable, the name declared in arguments
 ### `sefcc [variable name],[char code]`
 sets a variable to a character from a char code
 
+### `sernd [variable name],[min],[max]`
+sets a variable to a random number 
+
 ### `lovar [variable]`
 loads a variable to be used.
 
@@ -50,6 +53,9 @@ loads a variable to be used.
 
 ### `nvpri`
 prints the current loaded variable to the screen.
+
+### `nvgtinp [question]`
+gets input from user and stores it to loaded variable
 
 ## Next Number (NN) commands
 
@@ -180,6 +186,12 @@ sets the background cursor text color to the content of a variable
 ### `if [variable],[expression],[line number]`
 checks if the variable (concatenated with the expression) is true, and if it is it moves to the line number. if not it continues
 
+### `ifhigher [var1],[var2],[variable name]`
+checks if var1 is higher than var2. if it is, it sets the variable (declared in the arguments as `variable name`) to a 1. if not, it sets it to a 0.
+
+### `iflower [var1],[var2],[variable name]`
+checks if var1 is lower than var2. if it is, it sets the variable (declared in the arguments as `variable name`) to a 1. if not, it sets it to a 0.
+
 ## Misc. commands
 
 ### `curhom`
@@ -191,8 +203,11 @@ resets the color of the text and background
 ### `gtinp [question],[variable]`
 gets input from user and stores it to variable
 
-### `nvgtinp [question]`
-gets input from user and stores it to loaded variable
+### `iiner`
+ignores internal commands if they're bugging you too much.
+
+### `iucer`
+ignores unknown command errors if they're bugging you too much.
 
 ## `import` command and how to use modules
 ### BE CAREFUL! *this can be used to import malicious commands and may ruin your system, check the command code before you use them!*
