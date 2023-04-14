@@ -5,7 +5,13 @@ const prompt = require("prompt-sync")({ sigint: true }); //for gtinp, nvgtinp, a
 var ignoreInternalError = false;
 var ignoreCommandError = false;
 
-function stst(fn) { //for the "if" command, since i'm lazy
+function stst(fnt) { //for the "if" command, since i'm lazy
+  fn = fnt
+  if(fn.match(/[a-zA-Z]+/) != null){ //if theres alphanumeric stuff in the if statement
+    for(me of fn.match(/[a-zA-Z]+/)){
+      fn = fn.split(me).join(variables[me]) //replace all of them with variable versions
+    }
+  } //this is good for preventing ACE from happening
   ttt = new Function('return (' + fn +")")()
   if(typeof ttt == "boolean"){
      return new Function('return (' + fn +")")();
