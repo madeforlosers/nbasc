@@ -1,88 +1,94 @@
-const ansi = require("m.easyansi")
-const fs = require("fs")
-const prompt = require("prompt-sync")({ sigint: true });
- const shell = require('shelljs')
+const ansi = require("m.easyansi"); //for colors and cursor pos
+const fs = require("fs"); //for reading file
+const prompt = require("prompt-sync")({ sigint: true }); //for gtinp, nvgtinp, and the shell
+ const shell = require('shelljs'); //for modules
+var ignoreInternalError = false;
+var ignoreCommandError = false;
 
-//console.log(file)
-function stst(fn) {
+function stst(fn) { //for the "if" command, since i'm lazy
   ttt = new Function('return (' + fn +")")()
-  //console.log(typeof fn)
   if(typeof ttt == "boolean"){
      return new Function('return (' + fn +")")();
   }
- 
 };
+function randomint(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
+}
 
-function runfil(name){
+function runfil(name){ //for the "import" command
   shell.exec('node '+name+".js")
 }
-var acceptedwords = [
-  "lovar",
-  "senum",
-  "sedat",
-  "sestr",
-  "selis",
-  "sefcc",
-  "sefccfv",
-  "stpri",
-  "instpri",
-  "nvpri",
-  "innvpri",
-  "nnadd",
-  "nnvadd",
-  "nnsub",
-  "nnvsub",
-  "nnsin",
-  "nnvsin",
-  "nnmul",
-  "nnvmul",
-  "nndiv",
-  "nnvdiv",
-  "nnexp",
-  "nnset",
-  "nnvset",
-  "nnfloor",
-  "nsadd",
-  "nsrep",
-  "nsvrep",
-  "nladd",
-  "nsvadd",
-  "nlvadd",
-  "nssub",
-  "vcrpos",
-  "nncurx",
-  "nncury",
-  "ntolin",
-  "curhom",
-  "fgcol",
-  "bgcol",
-  "rscol",
-  "fgvcol",
-  "bgvcol",
-  "nnfgcol",
-  "nnbgcol",
-  "ndgtms",
-  "ndgtmn",
-  "ndgtsc",
-  "ndgthr",
-  "gtinp",
-  "nvgtinp",
-  "import",
+var acceptedwords = [ //all the accepted commands. I don't know why I have this here, but if I remove it it breaks everything.
+  "iiner", //ignore internal errors
+  "iucer", //ignore unknown command errors
+  "lovar", //load variable
+  "senum", //set number
+  "sedat", //set date
+  "sestr", //set string
+  "selis", //set list
+  "sefcc", //set from char code
+  "sernd", //set random number
+  "sefccfv", //set from char code from variable
+  "stpri", //string print
+  "instpri", //inline string print
+  "nvpri", //next variable print
+  "innvpri", //inline next variable print
+  "nnadd", //next number add
+  "nnvadd", //next number variable add
+  "nnsub", //next number subtract
+  "nnvsub", //next number variable subtract
+  "nnsin", //next number sine wave
+  "nnvsin", //next number variable sine wave
+  "nnmul", //next number multiply
+  "nnvmul", //next number variable multiply
+  "nndiv", //next number divide
+  "nnvdiv", //next number variable divide
+  "nnexp", //next number exponent
+  "nnset", //next number set
+  "nnvset", //next number variable set
+  "nnfloor", //next number floor
+  "nsadd", //next string add
+  "nsrep", //next string repeat
+  "nsvrep", //next string variable repeat
+  "nladd", //next list add
+  "nsvadd", //next string variable add
+  "nlvadd", //next list variable add
+  "nssub", //next string subtract
+  "vcrpos", //variable cursor position
+  "nncurx", //next number cursor x
+  "nncury", //next number cusror y
+  "ntolin", //number to line
+  "curhom", //cursor home
+  "fgcol", //foreground color
+  "bgcol", //background color
+  "rscol", //reset color
+  "fgvcol", //foreground variable color
+  "bgvcol", //background variable color
+  "nnfgcol", //next number foreground color
+  "nnbgcol", //next number background color
+  "ndgtms", //next date get milliseconds
+  "ndgtmn", //next date get minute
+  "ndgtsc", //next date get second
+  "ndgthr", //next date get hour
+  "gtinp", //get input
+  "nvgtinp", //next variable get input
+  "ifhigher", //if higher
+  "iflower", //if higher
+  "import", //import
   "if",
-  "#"
+  "#", //comment
+  "", //nothing
 ]
-var variables = {};
+var variables = {}; //variables list
 var loaded = "";
 var commands;
-function bypass(jsn){
-  commands.push(jsn)
-}
-var customcommands = {
-  
-}
-
 commands = {
+  "":function(){}, //nothing
   "#":function(){}, //comment
+  "iiner": function(){ignoreInternalError=true},
+   "iucer": function(){ignoreCommandError=true},
   "lovar": function(va){loaded = va},
   "stpri": function(str){console.log(str)},
   "instpri": function(str){process.stdout.write(str)},
@@ -94,6 +100,7 @@ commands = {
   "sedat": function(variable){variables[variable] = new Date()},
   "selis": function(variable){variables[variable] = []},
   "sefcc": function(variable,code){variables[variable] = String.fromCharCode(code)},
+  "sernd": function(variable,min,max){variables[variable] = randomint(min,max)},
   "sefccfv": function(variable,variable2){variables[variable] = String.fromCharCode(parseInt(variables[variable2]))},
   "ndgtms": function(variable){variables[variable] = variables[loaded].getTime()},
   "ndgtsc": function(variable){variables[variable] = variables[loaded].getSeconds()},
@@ -114,6 +121,8 @@ commands = {
   "nnsin": function(v){variables[loaded] = Math.sin(parseInt(v))},
   "nsadd": function(str){variables[loaded] += str},
   "nsrep": function(newvar,times){variables[newvar] += variables[loaded].repeat(parseInt(times))},
+  "ifhigher": function(var1, var2, outputvar){variables[outputvar] = variables[var1]>variables[var2]?1:0},
+  "iflower": function(var1, var2, outputvar){variables[outputvar] = variables[var1]<variables[var2]?1:0},
   "nsvrep": function(newvar,times){variables[newvar] += variables[loaded].repeat(parseInt(variables[times]))},
   "nladd": function(str){variables[loaded].push(str)},
   "nsvadd": function(str){variables[loaded] += variables[str]},
@@ -158,33 +167,31 @@ commands = {
   }
 }
 
-var modnames = []
-function cmdn(fullcommand){
+function cmdn(fullcommand){ //get name of command
   return fullcommand.split(" ")[0];
 }
-function cmda(fullcommand){
+function cmda(fullcommand){ //get arguments of command
 if(fullcommand.split(cmdn(fullcommand)+" ")[1] == undefined){
   return [];
 }
   return fullcommand.split(cmdn(fullcommand)+" ")[1].split(",");
 }
 
-if(process.argv.length > 2){
-  var file = fs.readFileSync(process.argv[2], "utf8").split("\n");
-for(var i = 0; i < file.length; i++){
-  if(acceptedwords.includes(cmdn(file[i]))){
+if(process.argv.length > 2){ 
+  var file = fs.readFileSync(process.argv[2], "utf8").split("\n"); //read file
+for(var i = 0; i < file.length; i++){ 
+  if(acceptedwords.includes(cmdn(file[i]))){ //if command is in acceptedwords
     try{
-    //console.log(customcommands)
-      tv = commands[cmdn(file[i])](...cmda(file[i]));
-      if(tv != undefined){i = parseInt(tv.split("toline")[1])-2;}
-    }catch(e){console.log("** INTERNAL ERROR AT LINE "+(i+1) + ": "+e);}
+      tv = commands[cmdn(file[i])](...cmda(file[i])); //run command
+      if(tv != undefined){i = parseInt(tv.split("toline")[1])-2;} //if tv doesnt return undefined then go to line
+    }catch(e){if(!ignoreInternalError){console.log("** INTERNAL ERROR AT LINE "+(i+1) + ": "+e);}} //internal error
   }else{
-    console.log("** UNKNOWN COMMAND AT LINE "+(i+1));
+    if(!ignoreCommandError){console.log("** UNKNOWN COMMAND AT LINE "+(i+1));} //unknown command
     continue
   }
 }
-}else{
-  console.log("welcome to nbasc shell")
+}else{ //shell
+  console.log("welcome to nbasc shell") 
   console.log("type .endprom to stop the program")
   var command = ""
   while(command != ".endprom"){
