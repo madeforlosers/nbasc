@@ -63,6 +63,21 @@ var acceptedwords = [ //all the accepted commands. I don't know why I have this 
   "nsadd", //next string add
   "nsrep", //next string repeat
   "nsvrep", //next string variable repeat
+  "nsspl", //next string split
+  "nsvspl", //next string variable split
+  "nsjoi", //next string join
+  "nsvjoi", //next string variable join
+  "nsrpla", //next string replace
+  "nsvrpla", //next string variable replace
+  "nsvarpla", //next string variable (alt) replace
+  "nsvbrpla", //next string variable (alt 2) replace
+  "nsalrpla", //next string all replace 
+  "nsvalrpla", //next string variable all replace 
+  "nsvaalrpla", //next string variable (alt) all replace 
+  "nsvbalrpla", //next string variable (alt 2) all replace 
+  "nsgtln", //next string get length
+  "nstupc", //next string to upercase
+  "nstlwc", //next string to lowercase
   "nladd", //next list add
   "nsvadd", //next string variable add
   "nlvadd", //next list variable add
@@ -137,6 +152,21 @@ commands = {
   "nnsin": function(v){variables[loaded] = Math.sin(parseInt(v))},
   "nsadd": function(str){variables[loaded] += str},
   "nsrep": function(newvar,times){variables[newvar] += variables[loaded].repeat(parseInt(times))},
+  "nsspl": function(str){variables[loaded] = variables[loaded].split(str)},
+  "nsvspl": function(variable){variables[loaded] = variables[loaded].split(variables[variable])},
+  "nsjoi": function(str){variables[loaded] = variables[loaded].join(str)},
+  "nsvjoi": function(variable){variables[loaded] = variables[loaded].join(variables[variable])},
+  "nsrpla": function(wha,wit){variables[loaded] = variables[loaded].replace(wha,wit)},
+  "nsvrpla": function(whav,wit){variables[loaded] = variables[loaded].replace(variable[whav],wit)},
+  "nsvarpla": function(wha,witv){variables[loaded] = variables[loaded].replace(wha,variable[witv])},
+  "nsvbrpla": function(whav,witv){variables[loaded] = variables[loaded].replace(variable[whav],variable[witv])},
+  "nsalrpla": function(wha,wit){variables[loaded] = variables[loaded].split(wha).join(wit)},
+  "nsvalrpla": function(wha,wit){variables[loaded] = variables[loaded].split(variable[wha]).join(wit)},
+  "nsvaalrpla": function(wha,wit){variables[loaded] = variables[loaded].split(wha).join(variable[wit])},
+  "nsvbalrpla": function(wha,wit){variables[loaded] = variables[loaded].split(variable[wha]).join(variable[wit])},
+  "nsgtln":function(out){variables[out] = variables[loaded].length},
+  "nstupc":function(){variables[loaded] = variables[loaded].toUpperCase()},
+  "nstlwc":function(){variables[loaded] = variables[loaded].toLowerCase()},
   "ifhigher": function(var1, var2, outputvar){variables[outputvar] = variables[var1]>variables[var2]?1:0},
   "iflower": function(var1, var2, outputvar){variables[outputvar] = variables[var1]<variables[var2]?1:0},
   "nsvrep": function(newvar,times){variables[newvar] += variables[loaded].repeat(parseInt(variables[times]))},
