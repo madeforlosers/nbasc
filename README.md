@@ -1,6 +1,6 @@
 # nbasc 
 *another really complicated language*<br>
-*version 4546*
+*version 5461*
 
 ## Table Of Contents
 1. Running Files
@@ -136,6 +136,51 @@ creates a new variable (`[new variable name]`) that contains the currently loade
 
 ### `nsvrep [new variable name], [number variable]`
 creates a new variable (`[new variable name]`) that contains the currently loaded string repeated n amount of times (from a variable)
+
+### `nsspl [string]`
+splits the loaded string variable into a list by splitting it with a string defined in arguments
+
+### `nsvspl [string variable]`
+splits the loaded string variable into a list by splitting it with a string variable defined in arguments
+
+### `nsjoi [string]`
+joins the currently loaded list with a string defined in arguments
+
+### `nsvjoi [string variable]`
+joins the currently loaded list with a string variable defined in arguments
+
+### `nsrpla [string1],[string2]`
+replaces 1 substring (string1) in current loaded variable with another (string2)
+
+### `nsvrpla [string1 variable],[string2]`
+replaces 1 substring (variable, string1 variable) in current loaded variable with another (string2)
+
+### `nsvarpla [string1],[string2 variable]`
+replaces 1 substring (string1) in current loaded variable with another (variable, string2 variable)
+
+### `nsvbrpla [string1 variable],[string2 variable]`
+replaces 1 substring (variable, string1 variable) in current loaded variable with another (variable, string2 variable)
+
+### `nsalrpla [string1],[string2]`
+replaces all matching substrings (string1) in current loaded variable with another (string2)
+
+### `nsvalrpla [string1 variable],[string2]`
+replaces all matching substrings (variable, string1 variable) in current loaded variable with another (string2)
+
+### `nsvaalrpla [string1],[string2 variable]`
+replaces all matching substrings (string1) in current loaded variable with another (variable, string2 variable)
+
+### `nsvbalrpla [string1 variable],[string2 variable]`
+replaces all matching substrings (variable, string1 variable) in current loaded variable with another (variable, string2 variable)
+
+### `nsgtln [number variable]` 
+gets the length of the current loaded string variable and outputs it to a variable declared in arguments
+
+### `nstupc` 
+makes the current loaded string variable uppercase
+
+### `nstlwc` 
+makes the current loaded string variable lowercase
 
 ## Next List (NL) commands
 
