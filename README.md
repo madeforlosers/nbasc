@@ -1,6 +1,6 @@
 # nbasc 
 *another really complicated language*<br>
-*version 5461*
+*version 6352*
 
 ## Table Of Contents
 1. Running Files
@@ -253,6 +253,15 @@ checks if var1 is lower than var2. if it is, it sets the variable (declared in t
 gets the item at the position (declared in arguments) of a list (also declared in arguments) and outputs it to a variable (also also declared in arguments)
 
 ## Misc. commands
+
+### `sepoi [point name],[line]`
+sets a point to go to
+
+### `topoi [point name]`
+goes to a point that has been declared
+
+### `return`
+when `topoi` has been called, `return` can be used to go back to *where* `topoi` was called and continue on from there.
 
 ### `curhom`
 sets the cursor to the home
