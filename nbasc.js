@@ -4,7 +4,7 @@ const prompt = require("prompt-sync")({ sigint: true }); //for gtinp, nvgtinp, a
  const shell = require('shelljs'); //for modules
 var ignoreInternalError = false; // for iiner command
 var ignoreCommandError = false; //for iucer command
-
+var savedPointInInterval = null;
 function stst(fnt) { //for the "if" command, since i'm lazy
   fn = fnt
   if(fn.match(/[a-zA-Z]+/) != null){ //if theres alphanumeric stuff in the if statement
@@ -34,12 +34,16 @@ var acceptedwords = [ //all the accepted commands. I don't know why I have this 
   "sedat", //set date
   "sestr", //set string
   "selis", //set list
+  "sepoi", //set point
   "sefcc", //set from char code
   "sernd", //set random number
+  "sefccfv", //set from char code from variable
   "gtflp", //get thing from list position
   "nngtflp", //next number get thing from list position
   "nlgtflp", //next list get thing from list position
-  "sefccfv", //set from char code from variable
+  "nlvgtflp", //next list variable get thing from list position
+  "topoi", //to point
+  "return", //return
   "stpri", //string print
   "instpri", //inline string print
   "nvpri", //next variable print
@@ -125,6 +129,9 @@ commands = {
   "sestr": function(variable){variables[variable] = ""},
   "sedat": function(variable){variables[variable] = new Date()},
   "selis": function(variable){variables[variable] = []},
+   "sepoi": function(variable, to){variables[variable] = {type:"point", "toline":to}},
+  "topoi": function(variable){return "pointline"+variables[variable]["toline"]},
+  "return": function(){return "returnto"},
   "nvrem": function(){variables[loaded] = undefined},
   "vrem": function(variable){variables[variable] = undefined},
   "sefcc": function(variable,code){variables[variable] = String.fromCharCode(code)},
@@ -132,6 +139,7 @@ commands = {
    "gtflp": function(variable,pos,out){variables[out] = variables[variable][pos]},
   "nngtflp": function(variable,out){variables[out] = variables[variable][variables[loaded]]},
   "nlgtflp": function(pos,out){variables[out] = variables[loaded][pos]},
+  "nlvgtflp": function(pos,out){variables[out] = variables[loaded][variables[pos]]},
   "sefccfv": function(variable,variable2){variables[variable] = String.fromCharCode(parseInt(variables[variable2]))},
   "ndgtms": function(variable){variables[variable] = variables[loaded].getTime()},
   "ndgtsc": function(variable){variables[variable] = variables[loaded].getSeconds()},
@@ -229,7 +237,19 @@ for(var i = 0; i < file.length; i++){
   if(acceptedwords.includes(cmdn(file[i]))){ //if command is in acceptedwords
     try{
       tv = commands[cmdn(file[i])](...cmda(file[i])); //run command
-      if(tv != undefined){i = parseInt(tv.split("toline")[1])-2;} //if tv doesnt return undefined then go to line
+      if(tv != undefined){
+        if(tv.includes("pointline")){ //go to set line
+          savedPointInInterval = i
+          i = parseInt(tv.split("pointline")[1])-2 
+        }else if(tv.includes("returnto")){ //return to regular i
+          if(savedPointInInterval != null){
+             i = savedPointInInterval;
+             savedPointInInterval = null
+          }
+        }else{
+        i = parseInt(tv.split("toline")[1])-2;
+        }
+      } //if tv doesnt return undefined then go to line
     }catch(e){if(!ignoreInternalError){console.log("** INTERNAL ERROR AT LINE "+(i+1) + ": "+e);}} //internal error
   }else{
     if(!ignoreCommandError){console.log("** UNKNOWN COMMAND AT LINE "+(i+1));} //unknown command
