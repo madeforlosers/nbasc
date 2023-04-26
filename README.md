@@ -1,6 +1,6 @@
 # nbasc 
 *another really complicated language*<br>
-*version 6352*
+*version 7197*
 
 ## Table Of Contents
 1. Running Files
@@ -145,6 +145,12 @@ splits the loaded string variable into a list by splitting it with a string vari
 
 ### `nsjoi [string]`
 joins the currently loaded list with a string defined in arguments
+
+### `nsset [string]`
+sets the currently loaded string variable to a string
+
+### `nsvset [string variable]`
+sets the currently loaded string variable to a string variable
 
 ### `nsvjoi [string variable]`
 joins the currently loaded list with a string variable defined in arguments
