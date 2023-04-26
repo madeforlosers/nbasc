@@ -62,6 +62,8 @@ var acceptedwords = [ //all the accepted commands. I don't know why I have this 
   "nnvdiv", //next number variable divide
   "nnexp", //next number exponent
   "nnset", //next number set
+  "nsset", //next string set
+  "nsvset", //next string variable set
   "nnvset", //next number variable set
   "nnfloor", //next number floor
   "nsadd", //next string add
@@ -86,6 +88,7 @@ var acceptedwords = [ //all the accepted commands. I don't know why I have this 
   "nsvadd", //next string variable add
   "nlvadd", //next list variable add
   "nssub", //next string subtract
+  "nsvsub", //next string variable subtract
   "vcrpos", //variable cursor position
   "nncurx", //next number cursor x
   "nncury", //next number cusror y
@@ -155,6 +158,8 @@ commands = {
   "nnvdiv": function(variable){variables[loaded] /= variables[variable]},
   "nnexp": function(num = 2){variables[loaded] **= parseInt(num)},
   "nnset": function(num = 0){variables[loaded] = parseInt(num)},
+  "nsset": function(str){variables[loaded] = str},
+  "nsvset": function(str){variables[loaded] = variables[str]},
   "nnvset": function(v){variables[loaded] = parseInt(variables[v])},
   "nnvsin": function(v){variables[loaded] = Math.sin(variables[v])},
   "nnsin": function(v){variables[loaded] = Math.sin(parseInt(v))},
@@ -182,6 +187,7 @@ commands = {
   "nsvadd": function(str){variables[loaded] += variables[str]},
   "nlvadd": function(str){variables[loaded].push(variables[str])},
   "nssub": function(num){variables[loaded] = variables[loaded].slice(0,num);},
+  "nsvsub": function(num){variables[loaded] = variables[loaded].slice(0,variables[num]);},
   "ntolin": function(num){return "toline"+num;},
   "curhom": function(){ansi.cursorHome();},
   "nncurx": function(){ansi.cursorRight(variables[loaded]);},
@@ -233,23 +239,23 @@ if(fullcommand.split(cmdn(fullcommand)+" ")[1] == undefined){
 
 if(process.argv.length > 2){ 
   var file = fs.readFileSync(process.argv[2], "utf8").split("\n"); //read file
-for(var i = 0; i < file.length; i++){ 
+for(var i = 0; i < file.length; i++){ // i from 0 to file length
   if(acceptedwords.includes(cmdn(file[i]))){ //if command is in acceptedwords
-    try{
-      tv = commands[cmdn(file[i])](...cmda(file[i])); //run command
-      if(tv != undefined){
-        if(tv.includes("pointline")){ //go to set line
+    try{ //try
+      commd = commands[cmdn(file[i])](...cmda(file[i])); //run command, the ...cmda(file[i]) puts the contents of the list as seperate arguments for the function
+      if(commd != undefined){ //if commd doesnt output
+        if(commd.includes("pointline")){ //go to set line
           savedPointInInterval = i
-          i = parseInt(tv.split("pointline")[1])-2 
-        }else if(tv.includes("returnto")){ //return to regular i
+          i = parseInt(commd.split("pointline")[1])-2 
+        }else if(commd.includes("returnto")){ //return to regular i
           if(savedPointInInterval != null){
              i = savedPointInInterval;
              savedPointInInterval = null
           }
         }else{
-        i = parseInt(tv.split("toline")[1])-2;
+        i = parseInt(commd.split("toline")[1])-2;
         }
-      } //if tv doesnt return undefined then go to line
+      } //if commd doesnt return undefined then go to line
     }catch(e){if(!ignoreInternalError){console.log("** INTERNAL ERROR AT LINE "+(i+1) + ": "+e);}} //internal error
   }else{
     if(!ignoreCommandError){console.log("** UNKNOWN COMMAND AT LINE "+(i+1));} //unknown command
@@ -260,7 +266,7 @@ for(var i = 0; i < file.length; i++){
   console.log("welcome to nbasc shell") 
   console.log("type .endprom to stop the program")
   var command = ""
-  while(command != ".endprom"){
+  while(command != ".endprom" ){
     command = prompt(">")
     try{
     commands[cmdn(command)](...cmda(command));
